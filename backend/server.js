@@ -4,6 +4,7 @@ import {clerkMiddleware} from "@clerk/express"
 import { ENV } from "./config/env.js"
 import { connectDB } from "./config/db.js"
 import userRouter from "./routes/userRoute.js"
+import postRouter from "./routes/postRoute.js"
 
 const app = express()
 
@@ -17,6 +18,13 @@ app.get("/", (req,res) =>{
 })
 
 app.use("/api/user", userRouter)
+app.use("/api/posts", postRouter)
+
+// error handling middleware
+app.use((err, req, res, next) => {  
+    console.error(err.stack);
+    res.status(500).json({ error: 'Something went wrong!' });
+})
 
 const startServer = async () =>{
     try {
