@@ -19,6 +19,7 @@ app.get("/", (req,res) =>{
 
 app.use("/api/user", userRouter)
 app.use("/api/posts", postRouter)
+app.use("/api/comments", commentRouter)
 
 // error handling middleware
 app.use((err, req, res, next) => {  
